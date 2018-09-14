@@ -162,6 +162,9 @@ public:
 	json UpdateUser(string user_id, string email, string name, string password, string role);
 	json DeleteUser(string user_id);
 
+	//Version APIs
+	json GetVersion();
+
 	//Virtual Machine Profiles APIs
 	json GetVirtualMachineProfiles(string zone_uri = "", string service_uri = "");
 	json GetVirtualMachineProfile(string vm_profile_id);
@@ -190,6 +193,7 @@ public:
 	json CreateZoneConnection(string zone_id, string uuid, string name, string ip_address, string username, string password, string port, string state);
 	json DeleteZoneConnection(string zone_id, string uuid);
 	json UpdateZoneConnection(string zone_id, string uuid, string op, string path, json value);
+	json GetZoneEndpoint(string zone_id);
 
 private:
 	json get(string url);
@@ -226,6 +230,7 @@ private:
 	string URI_TAG_KEYS = "/tag-keys";
 	string URI_TAGS = "/tags";
 	string URI_USERS = "/users";
+	string URI_VERSIONS = "/about/versions";
 	string URI_VIRTUAL_MACHINE_PROFILES = "/virtual-machine-profiles";
 	string URI_VOLUMES = "/volumes";
 	string URI_WORKSPACES = "/workspaces";

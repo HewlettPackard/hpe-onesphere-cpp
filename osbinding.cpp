@@ -159,6 +159,7 @@ json OSClient::UpdateAppliance(string appliance_id, json data) {
 //
 // --------------------------
 
+//Query properties: providerTypeUri, name
 json OSClient::GetBillingAccounts(string query, string view) {
 	string full_url = m_host_url + rest_prefix + URI_BILLING_ACCOUNTS + "?query=" + query + "&view=" + view;
 	return full_url;
@@ -285,6 +286,7 @@ json OSClient::GetConnectApp(string os) {
 //
 // --------------------------
 
+//Query properties: zoneUri, projectUri
 json OSClient::GetDeployments(string query, string user_query, string view) {
 	bool firstParam = true;
 	string full_url = m_host_url + rest_prefix + URI_DEPLOYMENTS;
@@ -446,6 +448,7 @@ json OSClient::GetMetrics(string resource_uri, string category, string group_by,
 //
 // --------------------------
 
+//Query properties: zoneUri, projectUri
 json OSClient::GetNetworks(string query) {
 	bool firstParam = true;
 	string full_url = m_host_url + rest_prefix + URI_NETWORKS;
@@ -555,6 +558,7 @@ json OSClient::GetProviderTypes() {
 //
 // --------------------------
 
+//Query properties: providerTypeUri, projectUri
 json OSClient::GetProviders(string query) {
 	bool firstParam = true;
 	string full_url = m_host_url + rest_prefix + URI_PROVIDERS + makeParam(firstParam, query, QUERY);
@@ -626,6 +630,7 @@ json OSClient::GetRate(string rate_id) {
 //
 // --------------------------
 
+//Query properties: providerUri
 json OSClient::GetRegions(string query, string view) {
 	string full_url = m_host_url + rest_prefix + URI_REGIONS + "?query=" + query + "&view=" + view;
 	return get(full_url);
@@ -785,6 +790,7 @@ json OSClient::GetServiceType(string service_type_id) {
 //
 // --------------------------
 
+//Query properties: catalogUri, serviceTypeUri
 json OSClient::GetServices(string query, string user_query, string view) {
 	string full_url = m_host_url + rest_prefix + URI_SERVICES + "?query=" + query + "&userQuery=" + user_query + "&view=" + view;
 	return get(full_url);
@@ -944,6 +950,17 @@ json OSClient::DeleteUser(string user_id) {
 	stringNotEmpty(user_id);
 	string full_url = m_host_url + rest_prefix + URI_USERS + "/" + user_id;
 	return deleteRequest(full_url);
+}
+
+// --------------------------
+//
+//		  Version APIs
+//
+// --------------------------
+
+json OSClient::GetVersion() {
+	string full_url = m_host_url + rest_prefix + URI_VERSIONS;
+	return get(full_url);
 }
 
 // --------------------------
@@ -1131,4 +1148,10 @@ json OSClient::UpdateZoneConnection(string zone_id, string uuid, string op, stri
 		{ "value" , value }
 	};
 	return patch(full_url, data);
+}
+
+json OSClient::GetZoneEndpoint(string zone_id) {
+	stringNotEmpty(zone_id);
+	string full_url = m_host_url + rest_prefix + URI_ZONES + "/" + zone_id + "/os-endpoints";
+	return get(full_url);
 }
