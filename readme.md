@@ -1,3 +1,5 @@
+*Note: This library is not currently being maintained. We will still maintain reviewing pull requests but active development for this library has paused.* 
+
 # C++ Binding for HPE OneSphere APIs
 
 The C++ binding package for HPE OneSphere APIs.
